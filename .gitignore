@@ -1,0 +1,4 @@
+.env
+consumer.py
+.idea
+app/__pycache__*
