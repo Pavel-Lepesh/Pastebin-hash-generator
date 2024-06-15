@@ -16,9 +16,8 @@ async def lifespan(app: FastAPI):
         encoding="utf8",
         decode_responses=True,
         )
-
     credentials = pika.PlainCredentials(settings.RABBITMQ_USER, settings.RABBITMQ_PASSWORD)
-    parameters = pika.ConnectionParameters(settings.RABBITMQ_HOST, settings.RABBITMQ_PORT, settings.RABBITMQ_VIRTUAL_HOST, credentials)
+    parameters = pika.ConnectionParameters(settings.RABBITMQ_HOST, settings.RABBITMQ_PORT, settings.RABBITMQ_VIRTUAL_HOST, credentials=credentials)
     connection = pika.BlockingConnection(parameters)
 
     task_generator = asyncio.create_task(generator_func(redis=redis), name='hash_generator')
