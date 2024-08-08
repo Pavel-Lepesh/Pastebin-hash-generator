@@ -14,7 +14,7 @@ async def producer_func(redis, kafka_client: AIOKafkaProducer):
             if hashes:
                 for hash_ in hashes:
                     hash_: str
-                    await kafka_client.send_and_wait("hashes", key=b'hash_link', value=hash_.encode())
+                    await kafka_client.send_and_wait("hashes", key=b'hash_link', value=hash_[1:-1].encode())
             else:
                 await asyncio.sleep(10)
     except KafkaError as error:
